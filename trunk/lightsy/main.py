@@ -34,6 +34,7 @@ def build_board(random=False):
 board = build_board()
 
 window = pyglet.window.Window(BOARD_SIZE * LIGHT_WIDTH, BOARD_SIZE * LIGHT_HEIGHT)
+window.set_caption('Lightsy')
 light_off = pyglet.resource.image('light-off.jpg')
 light_on = pyglet.resource.image('light-on.jpg')
 
