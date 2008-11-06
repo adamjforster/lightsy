@@ -9,6 +9,14 @@ LIGHT_WIDTH = 50
 LIGHT_HEIGHT = 45
 BOARD_SIZE = 5
 
+EMPTY = [
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+]
+
 def build_board(random=False):
     '''
     Example board:
@@ -53,6 +61,8 @@ def y_index(y):
     return (y//LIGHT_HEIGHT - 4) * -1
 
 def change_lights(x, y):
+    global board
+    
     x = x_index(x)
     y = y_index(y)
     coord_set = (
@@ -68,6 +78,8 @@ def change_lights(x, y):
                 board[coords[0]][coords[1]] = not(board[coords[0]][coords[1]])
         except IndexError:
             pass
+    if board == EMPTY:
+        board = build_board()
 
 @window.event
 def on_draw():
