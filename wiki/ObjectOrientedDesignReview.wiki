@@ -1,0 +1,12 @@
+#summary This page is for the development of a better OO design for Lightsy.
+#labels Phase-Design,Featured
+
+= Introduction =
+
+This page is for the development of a better OO design for Lightsy.
+
+= Ideas =
+
+  * Abstract base class for Board.
+  * Level as a class (inherit from AbstractBoard?)
+  * Light as a class (need to store previous state etc...)
