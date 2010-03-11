@@ -104,3 +104,4 @@ class LightsyWindow(pyglet.window.Window):
 if __name__ == '__main__':
     LightsyWindow()
     pyglet.app.run()
+
