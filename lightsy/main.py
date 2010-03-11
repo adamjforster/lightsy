@@ -1,7 +1,9 @@
+import copy
+
 import pyglet
 from pyglet.window import mouse
 
-from levels import LEVELS
+from levels import ANIMATION, EMPTY, LEVELS
 
 class Board():
     SIZE = 5
@@ -11,30 +13,27 @@ class Board():
     LIGHT_ON = pyglet.resource.image('light-on.jpg')
     LIGHT_OFF = pyglet.resource.image('light-off.jpg')
     
-    EMPTY = [
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-    ]
-    
     def __init__(self):
+        self.ani_step = 0
         self.load_level(0)
         
     def load_level(self, level_number):
-        # Ensure that self.lights is a clone of the level and not an alias.
-        self.lights = LEVELS[level_number][:]
+        try:
+            self.load_board(LEVELS[level_number])
+        except IndexError:
+            level_number = 0
+            self.load_board(LEVELS[level_number])
         self.current_level = level_number
+
+    def load_board(self, board):
+        # Ensure that self.lights is a clone of the level and not an alias.
+        self.lights = copy.deepcopy(board)
     
     def is_complete(self):
-        if self.lights == Board.EMPTY:
+        if self.lights == EMPTY:
             return True
         else:
             return False
-    
-    def change_level(self, level_number):
-        self.load_level(level_number)
     
     def __get_x_index(self, x):
         return x//Board.LIGHT_WIDTH
@@ -73,7 +72,16 @@ class Board():
             except IndexError:
                 pass
         if self.is_complete():
-            self.change_level(self.current_level + 1)
+            pyglet.clock.schedule_interval(self.animate, 10/60.0)
+
+    def animate(self, dt):
+        try:
+            self.load_board(ANIMATION[self.ani_step])
+            self.ani_step += 1
+        except IndexError:
+            pyglet.clock.unschedule(self.animate)
+            self.ani_step = 0
+            self.load_level(self.current_level + 1)
     
 class LightsyWindow(pyglet.window.Window):
     def __init__(self):
