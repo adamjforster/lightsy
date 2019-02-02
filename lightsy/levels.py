@@ -1,5 +1,4 @@
-'''
-Levels
+"""Levels
 
 Example level:
 LEVELX = [
@@ -9,9 +8,10 @@ LEVELX = [
     [0, 1, 0, 1, 0],
     [1, 0, 0, 0, 1],
 ]
-'''
+"""
 
 import copy
+
 
 LEVEL1 = [
     [0, 0, 0, 0, 0],
