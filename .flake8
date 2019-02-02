@@ -1,0 +1,6 @@
+[flake8]
+ignore =
+    W293  ; blank line contains whitespace
+    W391  ; blank line at end of file
+
+max-line-length = 100
