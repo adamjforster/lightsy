@@ -1,6 +1,6 @@
 import copy
-
 import pyglet
+
 from pyglet.window import mouse
 
 from levels import ANIMATION, EMPTY, LEVELS
